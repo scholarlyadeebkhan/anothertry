@@ -1,0 +1,21 @@
+[Unit]
+Description=AarogyaLink Backend Service (Gunicorn)
+After=network.target
+
+[Service]
+Type=notify
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/aarogyalink
+Environment=FLASK_APP=app.py
+Environment=FLASK_ENV=production
+Environment=FLASK_DEBUG=False
+ExecStart=/var/www/aarogyalink/venv/bin/gunicorn --config gunicorn.conf.py app:app
+ExecReload=/bin/kill -s HUP $MAINPID
+KillSignal=SIGTERM
+TimeoutStopSec=30
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

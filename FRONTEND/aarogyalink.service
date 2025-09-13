@@ -1,0 +1,17 @@
+[Unit]
+Description=AarogyaLink Backend Service
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/var/www/aarogyalink
+Environment=FLASK_APP=app.py
+Environment=FLASK_ENV=production
+Environment=FLASK_DEBUG=False
+ExecStart=/usr/bin/python3 /var/www/aarogyalink/run.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
